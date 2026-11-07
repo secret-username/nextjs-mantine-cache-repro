@@ -16,8 +16,8 @@ export default function Home() {
     // Simulate the server action completing
     setTimeout(() => {
       // 1. Close the modal (triggers a 200ms exit animation)
+      setIsPending(false);
       close();
-      
       // 2. IMMEDIATELY navigate away, which interrupts the exit animation
       // and causes the portal/overlay to orphan in the DOM.
       router.push('/project-editor');

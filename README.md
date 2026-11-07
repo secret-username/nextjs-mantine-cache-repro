@@ -3,7 +3,7 @@
 This repository is a minimal reproducible example (repro) demonstrating an interoperability bug between Next.js 16 (App Router) client-side caching and Mantine Modal exit animations.
 
 ## 🚀 Live Demo
-**[(https://nextjs-mantine-cache-repro.vercel.app/)]**
+**https://nextjs-mantine-cache-repro.vercel.app/**
 
 ## 🐛 The Bug
 When a user triggers `router.push()` at the exact moment a Mantine Modal is closed, Next.js takes a frozen snapshot of the DOM *before* Mantine's exit animation completes and the Portal fully unmounts. 

@@ -5,6 +5,10 @@ import { useRouter } from 'next/navigation';
 import { Button, Modal } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 
+/*
+  NOTE: Tested Workaround are intentionally commented out here to reproduce the bug.
+*/
+
 export default function Home() {
   const [opened, { open, close }] = useDisclosure(false);
   const router = useRouter();
@@ -18,9 +22,17 @@ export default function Home() {
       // 1. Close the modal (triggers a 200ms exit animation)
       setIsPending(false);
       close();
+
       // 2. IMMEDIATELY navigate away, which interrupts the exit animation
-      // and causes the portal/overlay to orphan in the DOM.
+      // and causes the portal/overlay to remain in the DOM.
       router.push('/project-editor');
+
+      // 2b. Delay navigation so that exit animation has time to complete
+      /*
+      setTimeout(() => {
+        router.push('/project-editor');
+      }, 250);
+      */
     }, 800);
   };
 
@@ -34,11 +46,7 @@ export default function Home() {
       
       <Button onClick={open}>Open Modal</Button>
 
-      {/* 
-        NOTE: The workaround `styles={{ overlay: { display: opened ? 'block' : 'none' } }}` 
-        is intentionally omitted here to reproduce the bug.
-      */}
-      <Modal opened={opened} onClose={close} title="Create New Project" centered>
+      <Modal opened={opened} onClose={close} title="Create New Project" centered /*styles={{ overlay: { display: opened ? 'block' : 'none' } }}*/>
         <p style={{ marginBottom: '1rem' }}>
           When you click the button below, we will call <code>close()</code> and <code>router.push()</code> simultaneously.
         </p>

@@ -8,7 +8,7 @@ This repository is a minimal reproducible example (repro) demonstrating an inter
 ## 🐛 The Bug
 When a user triggers `router.push()` at the exact moment a Mantine Modal is closed, Next.js takes a frozen snapshot of the DOM *before* Mantine's exit animation completes and the Portal fully unmounts. 
 
-When the user navigates back to the original page, Next.js restores this cached snapshot—leaving an orphaned, invisible `<div class="mantine-Modal-overlay">` blocking all page interactivity.
+When the user navigates back to the original page, Next.js restores this cached snapshot—leaving an invisible `<div class="mantine-Modal-overlay">` blocking all page interactivity.
 
 ## 🔄 Steps to Reproduce
 1. Go to the root page (Dashboard).

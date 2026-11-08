@@ -1,5 +1,11 @@
 import '@mantine/core/styles.css';
 import { MantineProvider, ColorSchemeScript } from '@mantine/core';
+//import { theme } from '@/styles/theme';
+
+/*
+  NOTE: Tested Workaround is intentionally commented out here to reproduce the bug.
+  Enabling the theme override will unmount modals on close to prevent Next.js cache snapshotting the exit animation
+*/
 
 export const metadata = {
   title: 'Mantine Modal Bug Repro',
@@ -17,7 +23,7 @@ export default function RootLayout({
         <ColorSchemeScript />
       </head>
       <body>
-        <MantineProvider>{children}</MantineProvider>
+        <MantineProvider /*theme={theme}*/>{children}</MantineProvider>
       </body>
     </html>
   );
